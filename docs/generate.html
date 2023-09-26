@@ -237,12 +237,12 @@ async function getTTFFile(fontName, variant) {
       throw new Error('Font not found in the JSON data.');
     }
 
-    const ttfURL = fontData.files[variant];
+    let ttfURL = fontData.files[variant];
     if (!ttfURL) {
       throw new Error('Variant not found for the specified font.');
     }
+    ttfURL = ttfURL.replace("http", "https");
 
-    // Now you have the TTF file URL for the specified font and variant
     return ttfURL;
   } catch (error) {
     console.error('Error fetching font data:', error.message);
