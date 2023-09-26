@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" translate="no"><head>
+<meta charSet="utf-8"/>
+<link rel="preload" href="util.js" as="script"/>
+<title>Free Logo Maker - Generate logos in your browser | LOGOKIO.com</title>
+<meta name="description" content="100% free logo maker that runs in your browser. Design and download unlimited logos for free without any registration."/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta property="og:title" content="Free Logo Maker - Generate logos in your browser | LOGOKIO.com"/><meta property="og:description" content="100% free logo maker that runs in your browser. Design and download unlimited logos for free without any registration."/>
+<meta property="og:image" content="1200x630.png"/>
+<meta property="og:image:alt" content="Free Logo Maker - Generate logos in your browser | LOGOKIO.com"/>
+<meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Free Logo Maker - Generate logos in your browser | LOGOKIO.com"/><meta name="twitter:description" content="100% free logo maker that runs in your browser. Design and download unlimited logos for free without any registration."/><meta name="twitter:image" content="1200x630.png"/><meta name="twitter:image:alt" content="Free Logo Maker - Generate logos in your browser | LOGOKIO.com"/>
+<link rel="icon" href="favicon.ico" type="image/x-icon" sizes="32X32"/>
+<link rel="icon" href="icon.png" type="image/png" sizes="192X192"/>
+<style>body {
+margin: 0;
+padding: 0;
+font-family: sans-serif;
+}
+
+header {
+display: block;
+}
+
+nav {
+display: block;
+padding: 5px 30px;
+}
+
+nav ul {
+margin: 0 auto;
+padding: 0px;
+list-style-position: inside;
+list-style-type: none;
+}
+
+nav ul li {
+display: inline-block;
+padding: 10px;
+vertical-align: middle;
+}
+
+.big-block {
+background: white;
+margin: 0 auto;
+overflow: hidden;
+}
+
+.big-block h1 {
+font-size: 42px;
+font-weight: 300;
+padding: 15px;
+margin: 50px 15px 10px;
+}
+
+.big-block p {
+font-size: 22px;
+padding: 0px 15px 15px;
+margin: 0px 15px;
+}
+
+.big-block form {
+padding: 30px;
+margin: 0;
+}
+
+input.main-input {
+background: white;
+outline: none;
+border: 1px solid #95a4b5;
+font-size: 17px;
+padding: 15px;
+border-radius: 10px;
+width: 50%;
+}
+
+input.main-submit {
+background: #ecf5ff;
+outline: none;
+border: 1px solid #0051ac;
+font-size: 17px;
+padding: 15px;
+color: #0051ac;
+border-radius: 10px;
+}
+
+.wrap {
+margin: 0 auto;
+max-width: 1000px;
+}
+
+a {
+color: #0051ac;
+text-decoration: none;
+}
+
+.showcase {
+background: #eaeef0;
+font-size: 0px;
+padding-top: 20px;
+}
+
+ul.showcase_grid {
+margin: 0 auto;
+padding: 0px;
+list-style-position: inside;
+list-style-type: none;
+}
+
+ul.showcase_grid li {
+display: inline-block;
+padding: 10px;
+vertical-align: middle;
+width: 33%;
+box-sizing: border-box;
+overflow: hidden;
+text-align: center;
+}
+
+ul.showcase_grid li img {
+width: 94%;
+margin: 0 auto;
+border-radius: 10px;
+box-shadow: 8px 8px 14px #c4c8c9;
+margin-bottom: 20px;
+}
+
+.section2 {
+margin-top: 30px;
+background: #eaeef0;
+overflow: hidden;
+}
+
+.section2 h2 {
+font-size: 32px;
+font-weight: normal;
+margin: 0;
+padding: 30px;
+padding-bottom: 0px;
+}
+
+p.s21 {
+float: left;
+max-width: calc(100% - 400px);
+padding: 30px;
+box-sizing: border-box;
+font-size: 21px;
+line-height: 30px;
+margin: 0;
+}
+
+p.s22 {
+float: left;
+max-width: 400px;
+overflow: hidden;
+margin: 0;
+}
+
+p.s22 img {
+width: 400px;
+}
+
+footer {
+display: block;
+padding: 15px;
+text-align: center;
+color: #444;
+}
+
+footer p {
+margin: 5px;
+font-size: 16px;
+line-height: 23px;
+}
+@media only screen and (max-width: 900px) {
+.big-block h1 {
+margin: 10px;
+font-size: 32px;
+line-height: 44px;
+}
+
+.big-block p {
+font-size: 20px;
+line-height: 28px;
+color: #555;
+padding: 0px 15px 0px;
+margin: 10px;
+}
+
+.big-block form {
+padding: 15px;
+}
+
+input.main-input {
+width: calc(100% - 30px);
+margin-bottom: 10px;
+display: block;
+}
+
+input.main-submit {
+width: 100%;
+display: block;
+}
+
+p.s21,
+p.s22 {
+float: none;
+max-width: 100%;
+}
+
+p.s22 {
+text-align: center;
+}
+
+p.s22 img {
+max-width: 90%;
+}
+
+nav {
+display: block;
+padding: 5px 15px;
+}
+}
+</style>
+</head>
+<body>
+<header>
+<nav class="wrap"><ul><li><a href="/" title="Logokio"><img src="logo.png" alt="Logokio" width="100"></a></li>
+</ul></nav></header>
+<div class="big-block">
+<div class="wrap">
+<h1>Generate a free Logo for your Website or App</h1>
+<p>A logo generator that works in your browser! Free, no sign-up and unlimited.</p>
+<form action="app.html" method="get" class="main-form">
+<input class="main-input" type="text" name="name" maxlength="40" placeholder="Enter your logo text..." required autofocus>
+<input class="main-submit" value="Make a Logo" type="submit">
+</form>
+</div>
+</div>
+<div class="showcase"><div class="wrap">
+<ul class="showcase_grid">
+<li><img src="logo_temp_1.png" alt="logo_temp"/></li>
+<li><img src="logo_temp_7.png" alt="logo_temp"/></li>
+
+<li><img src="logo_temp_5.png" alt="logo_temp"/></li>
+<li><img src="logo_temp_3.png" alt="logo_temp"/></li>
+<li><img src="logo_temp_2.png" alt="logo_temp"/></li>
+<li><img src="logo_temp_9.png" alt="logo_temp"/></li>
+
+<li><img src="logo_temp_4.png" alt="logo_temp"/></li>
+<li><img src="logo_temp_8.png" alt="logo_temp"/></li>
+<li><img src="logo_temp_6.png" alt="logo_temp"/></li>
+
+</ul>
+</div>
+</div>
+<div class="section2">
+<div class="wrap">
+<h2>Multiple logo files, at one click</h2>
+<p class="s21">With just one click you get a colored backgorund logo in a high quality PNG file, an inverted logo, a black transparent logo, a white transparent logo, a transparent colored logo and a SVG file.</p>
+<p class="s22"><img src="folm.png"></p></div>
+</div>
+
+<footer><p class="footertext">Logokio - Built and maintained by <a href="https://github.com/avadhesh18/">@avadhesh18</a><br> <a href="https://github.com/avadhesh18/Logokio">Star Logokio on Github</a> | <a href="https://github.com/avadhesh18/issues/">Issues</a></p>
+
+</footer>
+</body>
+</html>

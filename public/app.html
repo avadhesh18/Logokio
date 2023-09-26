@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" translate="no"><head><meta charSet="utf-8"/>
+<link rel="preload" href="util.js" as="script"/>
+<title>Generating logos... | LOGOKIO.com</title>
+<meta name="description" content="Generating on 100% free logo maker that runs in your browser. Design and download unlimited logos for free without any registration."/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="icon" href="favicon.ico" type="image/x-icon" sizes="32X32"/>
+<link rel="icon" href="icon.png" type="image/png" sizes="192X192"/>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+header {
+    display: block;
+    border-bottom: 1px solid #ddd;
+}
+
+nav {
+    display: block;
+    padding:5px 30px;
+}
+
+nav ul {
+    margin: 0 auto;
+    padding: 0px;
+    list-style-position: inside;
+    list-style-type: none;
+}
+
+nav ul li {
+    display: inline-block;
+    padding: 10px;
+    vertical-align: middle;
+}
+
+.big-block {
+    background: white;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.wrap {
+    margin: 0 auto;
+    max-width: 1000px;
+}
+
+a {
+    color: #0051ac;
+    text-decoration: none;
+}
+input.logotext {}
+
+.newlogo a:after {
+    content:" ";
+    background: red;
+    display: block;
+    width: 300px;
+    height: 250px;
+    position: absolute;
+    top: 0;
+    background: linear-gradient(45deg, transparent, #ffffff44);
+}
+
+
+
+body {
+    margin: 0 auto;
+    font-family: sans-serif;
+    background: #eaeef0;
+}
+
+.newlogo {
+    display: inline-block;
+    width: 300px;
+    margin: 0 auto;
+    overflow: hidden;
+    margin: 10px;
+    box-shadow: 4px 4px 40px #9a9a9a;
+    -webkit-box-shadow: 4px 4px 26px #9a9a9a;
+    border-radius: 4%;
+     transition:1s;
+}
+
+.newlogo img {
+    width: 300px;
+    display: block;
+    position: relative;
+}
+
+div#logoContainer {
+    width: 970px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+
+
+
+.newlogo a {
+    display: block;
+    position: relative;
+}
+
+.newlogo:hover{
+    transform:scale(1.05);
+
+
+}
+form.fitform {
+    height: 37px;
+    text-align: center;
+    background: white;
+    padding: 10px;
+}
+
+input#logotext {
+    padding: 5px 10px;
+    font-size: 16px;
+    height: 37px;
+    border: 1px solid #95a4b5;
+    border-radius: 5px;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+
+input.fitformsubmit {
+    padding: 5px 10px;
+    font-size: 16px;
+    height: 37px;
+    border: 1px solid #476270;
+    border-radius: 5px;
+    box-sizing: border-box;
+    vertical-align: middle;
+    background: #ecf5ff;
+    outline: none;
+    border: 1px solid #0051ac;
+    font-size: 17px;
+    color: #0051ac;
+    border-radius: 10px;
+}
+
+button#loadmore {
+    padding: 12px 20px;
+    font-size: 16px;
+    border: 1px solid #476270;
+    border-radius: 5px;
+    box-sizing: border-box;
+    vertical-align: middle;
+    background: #ecf5ff;
+    outline: none;
+    border: 1px solid #0051ac;
+    font-size: 17px;
+    color: #0051ac;
+    border-radius: 10px;
+    margin: 15px auto;
+    display: block;
+    cursor: pointer;
+}
+
+
+footer {
+    display: block;
+    padding: 15px;
+    text-align: center;
+    color: #444;
+}
+
+footer p {
+    margin: 5px;
+    font-size: 16px;
+    line-height: 23px;
+}
+@media only screen and (max-width: 900px) {
+.newlogo {
+    display: block;
+    max-width: calc(100% - 20px) !important;
+    text-align: center;
+    margin: 15px auto 25px;
+}
+
+div#logoContainer {
+    width: auto;
+}
+
+.newlogo img {
+    max-width: 100%;
+}
+
+.newlogo a:after {
+    max-width: 100% !important;
+    max-width: 100%;
+}
+
+}
+</style>
+</head>
+<body>
+<header>
+<nav class="wrap"><ul><li><a href="/" title="Logokio Homepage"><img src="logo.png" alt="Logokio" width="100"></a></li>
+</ul></nav></header>
+
+<form method="get" action="" class="fitform">
+<input class="logotext" value="H2O" id="logotext" name="name"/>
+<input type="submit" class="fitformsubmit"/>
+</form>
+
+<div id="logoContainer"></div>
+<canvas id="logoCanvas" width="500" height="350" style="display:none;"></canvas>
+<button onclick="loadmorevariations();" id="loadmore">Load More</button>
+<script src="util.js"></script>
+<script src="poly.js"></script>
+<script>
+const name = params.get('name');
+document.getElementById('logotext').value = name;
+
+var randomVariant;
+function loadNewFont() {
+document.getElementById('loadmore').disabled = true;
+document.getElementById('loadmore').innerHTML = 'Loading...';
+
+//  fetch('https://www.googleapis.com/webfonts/v1/webfonts?subset=latin&key=yourkey')
+fetch('https://t.overdevs.com/fonts.json').then(response => response.json())
+    .then(data => {
+      var fonts = data.items.filter(font => font.variants.includes('regular'));
+      var randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+      var fontName = randomFont.family;
+      var fontVariants = randomFont.variants;
+       randomVariant = fontVariants[Math.floor(Math.random() * fontVariants.length)];
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = generateCSSLink(fontName,randomVariant);
+      document.head.appendChild(link);
+      link.onload = function() {
+        // Change the font of the 'logotext' div
+        var logotext = document.querySelector('.logotext');
+        logotext.style.fontFamily = fontName;
+        logotext.style.fontWeight = randomVariant;
+                document.fonts.ready.then(function() {
+            setTimeout(text_handler,600);
+function text_handler(){
+        generateCanvasLogo(fontName);
+      }
+        });
+
+      };
+    });
+}
+
+var typee = "squar";
+function generateCanvasLogo(fontName) {
+  var canvas = document.getElementById('logoCanvas');
+  var ctx = canvas.getContext('2d');
+  var bgColor = randomColor();
+  ctx.fillStyle = bgColor;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  var fontSize = 30;
+  ctx.textBaseline = 'middle';
+  ctx.textAlign = 'center';
+  ctx.fontFamily = "fontName";
+  var text = document.querySelector('.logotext').value;
+   var cwi = canvas.width*0.5;
+ // var [fontSize, mwd,mht] =  getFontSizeToFit(ctx, text, cwi, canvas.height);
+ canvasheight = canvas.height*0.4;
+   fontSize = getFontSizeToFitx(text,fontName,cwi,canvasheight);
+  ctx.font = `${fontSize}px "${fontName}"`;
+  var x = canvas.width / 2;
+  const textMetrics = ctx.measureText(text);
+var x = canvas.width/ 2;
+
+var totalHeight = textMetrics.actualBoundingBoxAscent + textMetrics.actualBoundingBoxDescent;
+var y = (canvas.height - totalHeight) / 2 + textMetrics.actualBoundingBoxAscent;
+textColor = getContrastingColor(bgColor);
+  
+//calculate boundings
+
+var newcanvas = document.createElement('canvas');
+newcanvas.width = canvas.width; 
+newcanvas.height = canvas.height;
+var newctx = newcanvas.getContext('2d');
+ newctx.font = `${fontSize}px "${fontName}"`;
+   newctx.textBaseline = 'middle';
+  newctx.textAlign = 'center';
+  newctx.fontFamily = fontName;
+   newctx.fillStyle = textColor;
+//multiple = document.getElementById('multiple').checked ? true : false;
+multiple = false;
+multiplelines(canvas,text,x,y,newctx);
+
+var imageData = newctx.getImageData(0, 0, canvas.width, canvas.height);
+var pixels = imageData.data;
+ minX = canvas.width;
+ minY = canvas.height;
+ maxX = 0;
+ maxY = 0;
+for (var q = 0; q < canvas.height; q++) {
+  for (var p = 0; p < canvas.width; p++) {
+    var alpha = pixels[(q * canvas.width + p) * 4 + 3];
+    if (alpha > 0) {
+      minX = Math.min(minX, p);
+      minY = Math.min(minY, q);
+      maxX = Math.max(maxX, p);
+      maxY = Math.max(maxY, q);
+    }
+  }
+}
+
+
+//Generate variations
+
+let the_margin = maxX - minX;
+the_margin = canvas.width - the_margin;
+the_margin = the_margin / 2;
+let new_x_margin = minX - the_margin;
+console.log(new_x_margin);
+x = x - new_x_margin;
+minX = minX - new_x_margin;
+maxX = maxX - new_x_margin;
+
+//name = text;
+
+//var type = document.getElementById("type").value;
+[linewidth, roundedpx, newminX, newminY, neww, newh] = calculatexyValues(minX, maxX, minY, maxY, canvas); 
+
+
+
+
+choices = ['1', '1', '1', '1', '2', '3', '4', '5', '6'];
+type = choices[Math.floor(Math.random() * choices.length)];
+
+applyTypeToCanvas(type, canvas, text, x, y, ctx, textColor, bgColor, linewidth, roundedpx, newminX, newminY, neww, newh);
+
+
+
+    canvas.toBlob(function (blob) {
+      var imageUrl = URL.createObjectURL(blob);
+      var  editLink = `edit.html?text=${encodeURIComponent(text)}&fontName=${encodeURIComponent(
+        fontName
+      )}&fontVar=${encodeURIComponent(randomVariant)}&fontSize=${encodeURIComponent(fontSize)}&bgColor=${encodeURIComponent(
+        bgColor
+      )}&type=${encodeURIComponent(type)}&textColor=${encodeURIComponent(getContrastingColor(bgColor))}`;
+      addhtml = '<div class="newlogo"><a target="_blank" href="'+editLink+'"><img src="'+imageUrl+'"/></a></div>';
+      var logoContainer = document.getElementById('logoContainer');
+      logoContainer.insertAdjacentHTML('beforeend', addhtml);
+      checkupnext()
+})
+}
+
+
+
+
+function settextcolor(f,g){
+f.strokeStyle = g;
+f.fillStyle = g;
+}
+function setbgcolor(f,g){
+f.strokeStyle = g;
+f.fillStyle = g;
+}
+
+
+
+function multiplelines(cn,t,xz,yz,cc){
+if(multiple) {
+var lines = t.split(' ');
+ lines.forEach((line, index) => {
+    var lineHeight = fontSize * 1;
+    var halfHeight = yz;
+    var startY = halfHeight - (lines.length - 1) * lineHeight / 2 + index * lineHeight;
+    cc.fillText(line, xz, startY);
+  });
+}
+else {
+    cc.fillText(t, xz, yz);
+}
+}
+
+
+
+var xi = 0;
+function checkupnext(){
+if(xi > 7){
+document.getElementById('loadmore').disabled = false;
+document.getElementById('loadmore').innerHTML = 'Load More';
+return;
+}
+  loadNewFont();
+  xi++
+}
+
+function loadmorevariations()  {
+xi = 0;
+loadNewFont();
+}
+
+
+
+  loadNewFont();
+
+</script>
+
+<footer><p class="footertext">Built and maintained by <a href="https://github.com/avadhesh18/">@avadhesh18</a><br> <a href="https://github.com/avadhesh18/Logokio">Star Logokio on Github</a> | <a href="https://github.com/avadhesh18/issues/">Issues</a></p>
+
+</footer>
+</body></html>

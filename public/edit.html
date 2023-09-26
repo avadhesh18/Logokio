@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en" translate="no"><head><meta charSet="utf-8"/>
+<link rel="preload" href="util.js" as="script"/>
+<title>Edit your logo | LOGOKIO.com</title>
+<meta name="description" content="100% free logo maker that runs in your browser. Design and download unlimited logos for free without any registration."/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="icon" href="favicon.ico" type="image/x-icon" sizes="32X32"/>
+<link rel="icon" href="icon.png" type="image/png" sizes="192X192"/>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+header {
+    display: block;
+    border-bottom: 1px solid #ddd;
+}
+
+nav {
+    display: block;
+    padding:5px 30px;
+}
+
+nav ul {
+    margin: 0 auto;
+    padding: 0px;
+    list-style-position: inside;
+    list-style-type: none;
+}
+
+nav ul li {
+    display: inline-block;
+    padding: 10px;
+    vertical-align: middle;
+}
+
+.big-block {
+    background: white;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.wrap {
+    margin: 0 auto;
+    max-width: 1000px;
+}
+
+a {
+    color: #0051ac;
+    text-decoration: none;
+}
+.clr-picker{display:none;flex-wrap:wrap;position:absolute;width:200px;z-index:1000;border-radius:10px;background-color:#fff;justify-content:flex-end;direction:ltr;box-shadow:0 0 5px rgba(0,0,0,.05),0 5px 20px rgba(0,0,0,.1);-moz-user-select:none;-webkit-user-select:none;user-select:none}.clr-picker.clr-open,.clr-picker[data-inline=true]{display:flex}.clr-picker[data-inline=true]{position:relative}.clr-gradient{position:relative;width:100%;height:100px;margin-bottom:15px;border-radius:3px 3px 0 0;background-image:linear-gradient(rgba(0,0,0,0),#000),linear-gradient(90deg,#fff,currentColor);cursor:pointer}.clr-marker{position:absolute;width:12px;height:12px;margin:-6px 0 0 -6px;border:1px solid #fff;border-radius:50%;background-color:currentColor;cursor:pointer}.clr-picker input[type=range]::-webkit-slider-runnable-track{width:100%;height:16px}.clr-picker input[type=range]::-webkit-slider-thumb{width:16px;height:16px;-webkit-appearance:none}.clr-picker input[type=range]::-moz-range-track{width:100%;height:16px;border:0}.clr-picker input[type=range]::-moz-range-thumb{width:16px;height:16px;border:0}.clr-hue{background-image:linear-gradient(to right,red 0,#ff0 16.66%,#0f0 33.33%,#0ff 50%,#00f 66.66%,#f0f 83.33%,red 100%)}.clr-alpha,.clr-hue{position:relative;width:calc(100% - 40px);height:8px;margin:5px 20px;border-radius:4px}.clr-alpha span{display:block;height:100%;width:100%;border-radius:inherit;background-image:linear-gradient(90deg,rgba(0,0,0,0),currentColor)}.clr-alpha input,.clr-hue input{position:absolute;width:calc(100% + 32px);height:16px;left:-16px;top:-4px;margin:0;background-color:transparent;opacity:0;cursor:pointer;appearance:none;-webkit-appearance:none}.clr-alpha div,.clr-hue div{position:absolute;width:16px;height:16px;left:0;top:50%;margin-left:-8px;transform:translateY(-50%);border:2px solid #fff;border-radius:50%;background-color:currentColor;box-shadow:0 0 1px #888;pointer-events:none}.clr-alpha div:before{content:'';position:absolute;height:100%;width:100%;left:0;top:0;border-radius:50%;background-color:currentColor}.clr-format{display:none;order:1;width:calc(100% - 40px);margin:0 20px 20px}.clr-segmented{display:flex;position:relative;width:100%;margin:0;padding:0;border:1px solid #ddd;border-radius:15px;box-sizing:border-box;color:#999;font-size:12px}.clr-segmented input,.clr-segmented legend{position:absolute;width:100%;height:100%;margin:0;padding:0;border:0;left:0;top:0;opacity:0;pointer-events:none}.clr-segmented label{flex-grow:1;margin:0;padding:4px 0;font-size:inherit;font-weight:400;line-height:initial;text-align:center;cursor:pointer}.clr-segmented label:first-of-type{border-radius:10px 0 0 10px}.clr-segmented label:last-of-type{border-radius:0 10px 10px 0}.clr-segmented input:checked+label{color:#fff;background-color:#666}.clr-swatches{order:2;width:calc(100% - 32px);margin:0 16px}.clr-swatches div{display:flex;flex-wrap:wrap;padding-bottom:12px;justify-content:center}.clr-swatches button{position:relative;width:20px;height:20px;margin:0 4px 6px 4px;padding:0;border:0;border-radius:50%;color:inherit;text-indent:-1000px;white-space:nowrap;overflow:hidden;cursor:pointer}.clr-swatches button:after{content:'';display:block;position:absolute;width:100%;height:100%;left:0;top:0;border-radius:inherit;background-color:currentColor;box-shadow:inset 0 0 0 1px rgba(0,0,0,.1)}input.clr-color{order:1;width:calc(100% - 80px);height:32px;margin:15px 20px 20px auto;padding:0 10px;border:1px solid #ddd;border-radius:16px;color:#444;background-color:#fff;font-family:sans-serif;font-size:14px;text-align:center;box-shadow:none}input.clr-color:focus{outline:0;border:1px solid #1e90ff}.clr-clear,.clr-close{display:none;order:2;height:24px;margin:0 20px 20px;padding:0 20px;border:0;border-radius:12px;color:#fff;background-color:#666;font-family:inherit;font-size:12px;font-weight:400;cursor:pointer}.clr-close{display:block;margin:0 20px 20px auto}.clr-preview{position:relative;width:32px;height:32px;margin:15px 0 20px 20px;border-radius:50%;overflow:hidden}.clr-preview:after,.clr-preview:before{content:'';position:absolute;height:100%;width:100%;left:0;top:0;border:1px solid #fff;border-radius:50%}.clr-preview:after{border:0;background-color:currentColor;box-shadow:inset 0 0 0 1px rgba(0,0,0,.1)}.clr-preview button{position:absolute;width:100%;height:100%;z-index:1;margin:0;padding:0;border:0;border-radius:50%;outline-offset:-2px;background-color:transparent;text-indent:-9999px;cursor:pointer;overflow:hidden}.clr-alpha div,.clr-color,.clr-hue div,.clr-marker{box-sizing:border-box}.clr-field{display:inline-block;position:relative;color:transparent}.clr-field input{margin:0;direction:ltr}.clr-field.clr-rtl input{text-align:right}.clr-field button{position:absolute;width:30px;height:100%;right:0;top:50%;transform:translateY(-50%);margin:0;padding:0;border:0;color:inherit;text-indent:-1000px;white-space:nowrap;overflow:hidden;pointer-events:none}.clr-field.clr-rtl button{right:auto;left:0}.clr-field button:after{content:'';display:block;position:absolute;width:100%;height:100%;left:0;top:0;border-radius:inherit;background-color:currentColor;box-shadow:inset 0 0 1px rgba(0,0,0,.5)}.clr-alpha,.clr-alpha div,.clr-field button,.clr-preview:before,.clr-swatches button{background-image:repeating-linear-gradient(45deg,#aaa 25%,transparent 25%,transparent 75%,#aaa 75%,#aaa),repeating-linear-gradient(45deg,#aaa 25%,#fff 25%,#fff 75%,#aaa 75%,#aaa);background-position:0 0,4px 4px;background-size:8px 8px}.clr-marker:focus{outline:0}.clr-keyboard-nav .clr-alpha input:focus+div,.clr-keyboard-nav .clr-hue input:focus+div,.clr-keyboard-nav .clr-marker:focus,.clr-keyboard-nav .clr-segmented input:focus+label{outline:0;box-shadow:0 0 0 2px #1e90ff,0 0 2px 2px #fff}.clr-picker[data-alpha=false] .clr-alpha{display:none}.clr-picker[data-minimal=true]{padding-top:16px}.clr-picker[data-minimal=true] .clr-alpha,.clr-picker[data-minimal=true] .clr-color,.clr-picker[data-minimal=true] .clr-gradient,.clr-picker[data-minimal=true] .clr-hue,.clr-picker[data-minimal=true] .clr-preview{display:none}.clr-dark{background-color:#444}.clr-dark .clr-segmented{border-color:#777}.clr-dark .clr-swatches button:after{box-shadow:inset 0 0 0 1px rgba(255,255,255,.3)}.clr-dark input.clr-color{color:#fff;border-color:#777;background-color:#555}.clr-dark input.clr-color:focus{border-color:#1e90ff}.clr-dark .clr-preview:after{box-shadow:inset 0 0 0 1px rgba(255,255,255,.5)}.clr-dark .clr-alpha,.clr-dark .clr-alpha div,.clr-dark .clr-preview:before,.clr-dark .clr-swatches button{background-image:repeating-linear-gradient(45deg,#666 25%,transparent 25%,transparent 75%,#888 75%,#888),repeating-linear-gradient(45deg,#888 25%,#444 25%,#444 75%,#888 75%,#888)}.clr-picker.clr-polaroid{border-radius:6px;box-shadow:0 0 5px rgba(0,0,0,.1),0 5px 30px rgba(0,0,0,.2)}.clr-picker.clr-polaroid:before{content:'';display:block;position:absolute;width:16px;height:10px;left:20px;top:-10px;border:solid transparent;border-width:0 8px 10px 8px;border-bottom-color:currentColor;box-sizing:border-box;color:#fff;filter:drop-shadow(0 -4px 3px rgba(0,0,0,.1));pointer-events:none}.clr-picker.clr-polaroid.clr-dark:before{color:#444}.clr-picker.clr-polaroid.clr-left:before{left:auto;right:20px}.clr-picker.clr-polaroid.clr-top:before{top:auto;bottom:-10px;transform:rotateZ(180deg)}.clr-polaroid .clr-gradient{width:calc(100% - 20px);height:120px;margin:10px;border-radius:3px}.clr-polaroid .clr-alpha,.clr-polaroid .clr-hue{width:calc(100% - 30px);height:10px;margin:6px 15px;border-radius:5px}.clr-polaroid .clr-alpha div,.clr-polaroid .clr-hue div{box-shadow:0 0 5px rgba(0,0,0,.2)}.clr-polaroid .clr-format{width:calc(100% - 20px);margin:0 10px 15px}.clr-polaroid .clr-swatches{width:calc(100% - 12px);margin:0 6px}.clr-polaroid .clr-swatches div{padding-bottom:10px}.clr-polaroid .clr-swatches button{width:22px;height:22px}.clr-polaroid input.clr-color{width:calc(100% - 60px);margin:10px 10px 15px auto}.clr-polaroid .clr-clear{margin:0 10px 15px 10px}.clr-polaroid .clr-close{margin:0 10px 15px auto}.clr-polaroid .clr-preview{margin:10px 0 15px 10px}.clr-picker.clr-large{width:275px}.clr-large .clr-gradient{height:150px}.clr-large .clr-swatches button{width:22px;height:22px}.clr-picker.clr-pill{width:380px;padding-left:180px;box-sizing:border-box}.clr-pill .clr-gradient{position:absolute;width:180px;height:100%;left:0;top:0;margin-bottom:0;border-radius:3px 0 0 3px}.clr-pill .clr-hue{margin-top:20px}
+
+
+
+
+div#wrap {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+div#editor {
+    background: #fcfcfd;
+    padding: 10px;
+    color: #01090f;
+}
+
+div#bigcanvasholder {
+ background: #eaeef0;
+    text-align: center;
+    padding: 10px 0px;
+    border-radius: 8px;
+    margin: 10px 0px;
+}
+
+.row {
+    padding: 5px 10px;
+    border-bottom: 1px solid #eaeef0;}
+
+body {
+    background:#eaeef0;    
+}
+
+.text_inp, .color_inp {
+    outline: none;
+    border: 1px solid #ddd;
+    font-size: 15px;
+    height: 28px;
+    width: 113px;
+    padding-left:5px;
+}
+
+span.rowh {
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+.clr-field {
+    margin: 5px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.clr-field button:after{transform: scale(1.1);}
+
+.clr-field button{ 
+background:#eee !important;
+    border:1px solid #ddd;
+  
+}
+footer {
+    display: block;
+    padding: 15px;
+    text-align: center;
+    color: #444;
+}
+
+footer p {
+    margin: 5px;
+    font-size: 16px;
+    line-height: 23px;
+}
+.hidden {display:none;}
+
+button#done {
+    background: #ecf5ff;
+    background: #0051ac;
+    outline: none;
+    border: 1px solid #fcfcfd;
+    font-size: 17px;
+    padding: 15px;
+    color: #0051ac;
+    color: white;
+    border-radius: 10px;
+    margin: 20px auto;
+    text-align: center;
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    cursor: pointer;
+}
+textarea#doneit {
+    display: none;
+}
+@media only screen and (max-width: 900px) {
+canvas#logoCanvas {
+    max-width: 100%;
+}
+span.helper {
+    display: block;
+}
+
+
+
+}
+</style>
+</head>
+<body>
+<header>
+<nav class="wrap"><ul><li><a href="/" title="logokio"><img src="logo.png" alt="Logokio" width="100"></a></li>
+</ul></nav></header>
+
+<!--header-->
+<div id="wrap">
+<div id="editor">
+<div class="row">
+<span class="rowh">Logo Text:</span><input id="logotexte" class="text_inp" value="" type=text/>
+</div>
+<div class="row">
+<span class="rowh">Background:</span><input id="bgcolor" class="color_inp" value="" data-coloris type=text/>
+<span class="helper">Gradient background? <input type="checkbox" data-showid="gdi1" id="gradgyes" > </span>
+<div id="gdi1" style="display:none;">
+<input id="grad3" value="#000000" class="color_inp" type=text data-coloris/>
+<input id="grad4" value="#ffffff" class="color_inp" type=text data-coloris/>
+<input type="range" id="anglebg" name="anglebg" min="-90" max="180" step="10" value="-45" onchange="deflogo();">
+</div>
+</div>
+
+<div class="row">
+<span class="rowh">Text Color:</span>
+<span class="helper">Auto generate texr color? <input type="checkbox" class="check_inp" id="checkbox"  checked></span>
+<input id="textcolor" value="" class="color_inp" type="text" data-coloris disabled/>
+
+Gradient text? <input type="checkbox" id="gradyes" data-showid="gdi2" disabled>
+<div id="gdi2"  style="display:none;">
+<input id="grad1" value="#000000" class="color_inp" type=text data-coloris/>
+<input id="grad2" value="#000000" class="color_inp" type=text data-coloris/>
+<input type="range" id="angletg" name="angletg" min="-90" max="180" step="10" value="-45" onchange="deflogo();">
+</div>
+</div>
+
+<div class="row">
+<span class="rowh">Layout type</span>
+<select name="type" id="type" class="select_inp" onchange="deflogo();">
+<option value="1">Normal</option>
+<option value="3">Box</option>
+<option value="2">Filled Box</option>
+<option value="4">Rounded Box</option>
+<option value="5">Filled Rounded Box</option>
+<option value="6">Filled Circle</option>
+<option value="7">Circle</option>
+</select>
+
+</div>
+<div class="row"><span class="rowh">Text Style</span>
+Multiple lines? <input class="check_inp" type="checkbox" id="multiple" >  </div>
+<div id="mlti" class="hidden">
+<em>Use two spaces (' &nbsp;') to create a line break.</em>
+<div class="row">
+<span class="rowh">Letter spacing</span>
+<select name="alnsp" id="alnsp" class="select_inp" onchange="multiplecheck=true,deflogo();">
+<option value="center" selected>Center</option>
+<option value="left">Left</option>
+<option value="right">right</option></select>
+</div></div>
+
+
+<div id="bigcanvasholder">
+<canvas id="logoCanvas" width="600" height="400" ></canvas>
+</div>
+</div>
+<button id="done" onclick="doneyaar();">Done</button>
+<textarea id="doneit"></textarea>
+<script src="coloris.min.js"></script>
+
+<script src="util.js"></script>
+<script src="poly.js"></script>
+<script>
+var name = params.get('text');
+var fontName = params.get('fontName');
+var randomVariant = params.get('fontVar');
+var bgColor = params.get('bgColor');
+var textMetrics; var totalHeight;
+var fontSize = params.get('fontSize');
+var ltype = params.get('type');
+document.getElementById('type').value = ltype;
+document.getElementById('bgcolor').value = bgColor;
+document.getElementById('grad3').value = bgColor;
+var textColor = params.get('textColor');
+document.getElementById('textcolor').value = textColor;
+document.getElementById('grad1').value = textColor;
+document.getElementById('logotexte').value = name;
+var randomVariant;
+var x = ''; 
+var y = ''; 
+var letterspacing = 0;
+var minX,minY,maxX,maxY,multiple;
+var multiplecheck = true;
+function loadNewFont() {
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = generateCSSLink(fontName,randomVariant);
+      document.head.appendChild(link);
+      link.onload = function() {
+        // Change the font of the 'logotexte' div
+        var logotexte = document.querySelector('#logotexte');
+        logotexte.style.fontFamily = fontName;
+        logotexte.style.fontWeight = randomVariant;
+                document.fonts.ready.then(function() {
+            setTimeout(text_handler,600);
+function text_handler(){
+        deflogo();
+      }
+        });
+
+      };
+}
+
+function deflogo(){
+textColor = document.getElementById('textcolor').value;
+bgColor = document.getElementById('bgcolor').value;
+generateCanvasLogo(document.getElementById('logoCanvas'),fontName,bgColor,textColor);
+}
+document.querySelectorAll('[data-showid]').forEach(function(checkbox) {
+  const div = document.getElementById(checkbox.dataset.showid);
+  checkbox.addEventListener('change', function() {
+    div.style.display = checkbox.checked ? 'block' : 'none';
+    deflogo();
+  });
+});
+
+
+var typee = "squar";
+
+
+function generateCanvasLogo(canvas,fontName,bgColor,textColor,isfavicon = false) {
+  var ctx = canvas.getContext('2d');
+  setbgcolor(ctx,bgColor)
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.textBaseline = 'middle';
+  ctx.textAlign = document.querySelector('#alnsp').value;
+  ctx.fontFamily = fontName;
+  text = document.querySelector('#logotexte').value;
+  //letterspacing = document.querySelector('#letsp').value;
+  multiple = document.getElementById('multiple').checked ? true : false;
+  var cwi = canvas.width*0.4;
+  if(name == text && multiplecheck === false) {
+     
+  }
+  else {
+      if(multiple) {chklines  = text.split('  '); 
+chkedline = chklines[findLineIndexWithMostCharacters(chklines)];
+ divideheight = chklines.length+3;
+canvasheight = canvas.height/divideheight;
+      }
+      else {chkedline= text; canvasheight = canvas.height*0.4;}
+     
+   [fontSize, mwd,mht] =  getFontSizeToFit(ctx, chkedline, cwi, canvasheight);
+ 
+ // fontSize = getFontSizeToFitx(chkedline,fontName,cwi,canvasheight);
+  console.log('fontsize'+fontSize);
+}
+  ctx.font = `${fontSize}px "${fontName}"`;
+  if(x== '' || name != text || multiplecheck != false) {
+textMetrics = ctx.measureText(text);
+ x = canvas.width/ 2;
+ totalHeight = textMetrics.actualBoundingBoxAscent + textMetrics.actualBoundingBoxDescent;
+ 
+ y = (canvas.height - totalHeight) / 2 + textMetrics.actualBoundingBoxAscent;
+ 
+ 
+var newcanvas = document.createElement('canvas');
+newcanvas.width = canvas.width; 
+newcanvas.height = canvas.height;
+var newctx = newcanvas.getContext('2d');
+ newctx.font = `${fontSize}px "${fontName}"`;
+   newctx.textBaseline = 'middle';
+  newctx.textAlign = document.querySelector('#alnsp').value;;
+  newctx.fontFamily = fontName;
+   newctx.fillStyle = textColor;
+multiplelines(newcanvas,text,x,y,newctx);
+var imageData = newctx.getImageData(0, 0, canvas.width, canvas.height);
+var pixels = imageData.data;
+ minX = canvas.width;
+ minY = canvas.height;
+ maxX = 0;
+ maxY = 0;
+for (var q = 0; q < canvas.height; q++) {
+  for (var p = 0; p < canvas.width; p++) {
+    var alpha = pixels[(q * canvas.width + p) * 4 + 3];
+    if (alpha > 0) {
+      minX = Math.min(minX, p);
+      minY = Math.min(minY, q);
+      maxX = Math.max(maxX, p);
+      maxY = Math.max(maxY, q);
+    }
+  }
+}
+  multiplecheck = false;
+}
+
+
+let the_margin = maxX - minX;
+the_margin = canvas.width - the_margin;
+the_margin = the_margin / 2;
+let new_x_margin = minX - the_margin;
+console.log(new_x_margin);
+x = x - new_x_margin;
+minX = minX - new_x_margin;
+maxX = maxX - new_x_margin;
+
+name = text;
+
+var type = document.getElementById("type").value;
+[linewidth, roundedpx, newminX, newminY, neww, newh] = calculatexyValues(minX, maxX, minY, maxY, canvas); 
+
+applyTypeToCanvas(type, canvas, text, x, y, ctx, textColor, bgColor, linewidth, roundedpx, newminX, newminY, neww, newh);
+
+
+
+}
+function settextcolor(f,g){
+if(document.getElementById('gradgyes').checked && g==bgColor){
+  angle = document.getElementById('anglebg').value * Math.PI / 180,
+    x2 = f.canvas.clientWidth * Math.cos(angle);
+    y2 = f.canvas.clientHeight * Math.sin(angle);
+g=f.createLinearGradient(0,0,x2,y2);
+g.addColorStop("0",document.getElementById('grad3').value);
+g.addColorStop("1",document.getElementById('grad4').value);
+}
+else if(document.getElementById('gradyes').checked &&  g!=bgColor){
+    angle = document.getElementById('angletg').value * Math.PI / 180,
+    x2 = f.canvas.clientWidth * Math.cos(angle);
+    y2 = f.canvas.clientHeight * Math.sin(angle);
+g=f.createLinearGradient(0,0,x2,y2);
+g.addColorStop("0",document.getElementById('grad1').value);
+g.addColorStop("1",document.getElementById('grad2').value);
+}
+else {
+
+}
+f.strokeStyle = g;
+f.fillStyle = g;
+}
+function setbgcolor(f,g){
+if(document.getElementById('gradgyes').checked){
+    angle = document.getElementById('anglebg').value * Math.PI / 180,
+    x2 = f.canvas.clientWidth * Math.cos(angle);
+        y2 = f.canvas.clientWidth * Math.sin(angle);
+  //  y2 = f.canvas.clientHeight * Math.sin(angle);
+g=f.createLinearGradient(0,0,x2,y2);
+g.addColorStop("0",document.getElementById('grad3').value);
+g.addColorStop("1",document.getElementById('grad4').value);
+}
+else {
+
+}
+f.strokeStyle = g;
+f.fillStyle = g;
+}
+function drawTextAlongArc(context, str, centerX, centerY, radius, angle){
+                context.save();
+                context.translate(centerX, centerY);
+                context.rotate(-1 * angle / 2);
+                context.rotate(-1 * (angle / str.length) / 2);
+                for (var n = 0; n < str.length; n++) {
+                    context.rotate(angle / str.length);
+                    context.save();
+                    context.translate(0, -1 * radius);
+                    var char = str[n];
+                    context.fillText(char, 0, 0);
+                    context.restore();
+                }
+                context.restore();
+}
+
+
+
+
+
+document.getElementById('logotexte').addEventListener('input',function(){
+deflogo();
+});
+document.getElementById('bgcolor').addEventListener('input',function(){
+if(document.getElementById('checkbox').checked) {
+document.getElementById('textcolor').value= getContrastingColor(this.value);
+}
+ deflogo();
+ 
+});
+
+document.getElementById('textcolor').addEventListener('input',function(){
+//document.getElementById('colorpicker2').value=this.value;
+ deflogo();
+ 
+});
+
+document.getElementById('checkbox').addEventListener('change',function(){
+ var checkbox = document.getElementById('checkbox');
+  var textcolor = document.getElementById('textcolor');
+ 
+
+  if (checkbox.checked) {
+    // Checkbox is checked, enable textcolor and colorpicker
+    textcolor.disabled = true;
+  document.getElementById('gradyes').checked = false;
+    document.getElementById('gdi2').style.display = 'none';
+  document.getElementById('gradyes').disabled= true;
+        var tgis = document.getElementById('bgcolor').value;
+
+document.getElementById('textcolor').value= getContrastingColor(tgis);
+deflogo();
+  } else {
+    // Checkbox is not checked, disable textcolor and colorpicker
+    textcolor.disabled = false;
+ document.getElementById('gradyes').disabled= false;
+   
+
+  }
+});
+document.getElementById('multiple').addEventListener('change',function(){
+multiplecheck = true;
+deflogo();
+document.getElementById('mlti').classList.toggle("hidden");
+});
+   loadNewFont();
+
+Coloris({
+  alpha: false,
+    swatches: [bgColor,textColor,'#ffffff','#000000'
+],
+  onChange: (color,el) => isthis(color,el)
+});
+function isthis(c,e)
+{if(e.id.startsWith('grad'))
+{deflogo();}}
+
+//colorpicker
+
+
+
+function doneyaar(){
+const finaltog = {};
+ finaltog["text"] = document.getElementById('logotexte').value;
+ finaltog["font"] =  params.get('fontName');
+ finaltog["size"] =  params.get('fontSize');
+ finaltog["variant"] = params.get('fontVar');
+ finaltog["bg"] = document.getElementById('bgcolor').value;
+ finaltog["bggr"] = document.getElementById('gradgyes').checked;
+ finaltog["bg1"] = document.getElementById('grad3').value;
+ finaltog["bg2"] = document.getElementById('grad4').value;
+ finaltog["bga"] = document.getElementById('anglebg').value;
+ finaltog["tc"] = document.getElementById('textcolor').value;
+ finaltog["tcgr"] = document.getElementById('gradyes').checked;
+ finaltog["tc1"] = document.getElementById('grad1').value;
+ finaltog["tc2"] = document.getElementById('grad2').value;
+ finaltog["tca"] = document.getElementById('angletg').value;
+ finaltog["type"] = document.getElementById('type').value;
+ finaltog["multi"] = document.getElementById('multiple').checked;
+finaltog["ltsp"] = letterspacing;
+finaltog["alnsp"] = document.getElementById('alnsp').value;
+
+
+sessionStorage.setItem('user', JSON.stringify(finaltog));
+var obj = sessionStorage.user;
+window.location.href="generate.html";
+}
+</script>
+<footer><p class="footertext">Built and maintained by <a href="https://github.com/avadhesh18/">@avadhesh18</a><br> <a href="https://github.com/avadhesh18/Logokio">Star Logokio on Github</a> | <a href="https://github.com/avadhesh18/issues/">Issues</a></p>
+</footer>
+</body></html>

@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en" translate="no"><head><meta charSet="utf-8"/>
+<link rel="preload" href="util.js" as="script"/>
+<title>Generated logos | LOGOKIO.com</title>
+<meta name="description" content="100% free logo maker that runs in your browser. Design and download unlimited logos for free without any registration. Generated logos!"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="icon" href="favicon.ico" type="image/x-icon" sizes="any"/>
+<link rel="icon" href="icon.png?d6972d29ad2f9d9e" type="image/png" sizes="192X192"/>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+header {
+    display: block;
+    border-bottom: 1px solid #ddd;
+}
+
+nav {
+    display: block;
+    padding:5px 30px;
+}
+
+nav ul {
+    margin: 0 auto;
+    padding: 0px;
+    list-style-position: inside;
+    list-style-type: none;
+}
+
+nav ul li {
+    display: inline-block;
+    padding: 10px;
+    vertical-align: middle;
+}
+
+.big-block {
+    background: white;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.wrap {
+    margin: 0 auto;
+    max-width: 1000px;
+}
+
+a {
+    color: #0051ac;
+    text-decoration: none;
+}
+
+
+div#wrap {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+div#editor {
+    background: #eee;
+    padding: 10px;
+}
+
+div#bigcanvasholder {
+    background: blue;
+}
+
+.row {
+    padding: 5px 10px;
+    border-bottom: 1px solid beige;
+}
+
+body {
+    background: linear-gradient(45deg, #bbb, #fff);
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+
+}
+
+.text_inp, .color_inp {
+    outline: none;
+    border: 1px solid #bbb;
+    font-size: 15px;
+    height: 28px;
+    width: 113px;
+    padding-left:5px;
+}
+
+span.rowh {
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+.clr-field {
+    margin: 5px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.clr-field button:after{transform: scale(1.1);}
+
+.clr-field button{ 
+background:#eee !important;
+    border:1px solid #ddd;
+  
+}
+div#svgContainer {
+
+}
+.newglogo {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 15px;
+}
+
+.newglogo img {
+    width: 100px;
+    vertical-align: middle;
+    margin-right: 20px;
+}
+div#svgContainer {
+    border-bottom: 1px solid #ddd;
+    padding: 5px;
+}
+div#svgContainer svg {
+    width: 100px;
+    height: 100px;
+}
+.newglogo img {
+    float: left;
+}
+
+.newglogo {
+    clear: both;
+    overflow: hidden;
+}
+
+div#logotext {
+    text-align: center;
+    padding: 10px;
+}
+footer {
+    display: block;
+    padding: 15px;
+    text-align: center;
+    color: #444;
+}
+
+footer p {
+    margin: 5px;
+    font-size: 16px;
+    line-height: 23px;
+}
+div#svgContainer svg {
+    float: left;
+    margin-right: 30px;
+}
+
+div#svgContainer {
+    clear: both;
+    overflow: hidden;
+}
+
+</style>
+</head>
+<body>
+<header>
+<nav class="wrap"><ul><li><a href="/" title="logokio"><img src="logo.png" alt="Logokio" width="100"></a></li>
+</ul></nav></header>
+
+<!--header-->
+<div id="wrap">
+<div id="logotext">Loading</div>
+<div id="bigcanvasholder">
+<canvas id="logoCanvas" width="2000" height="2000"  style="display:none;
+"></canvas>
+<canvas id="logoCanvas3" width="192" height="192"  style="display:none;"></canvas>
+<canvas id="logoCanvas7" width="500" height="500" style="display:none;" ></canvas>
+
+</div>
+<div id="newlogos"></div>
+<div id="myrec"></div>
+<div id="svgContainer"></div>
+<script src="util.js"></script>
+<script src="poly.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas2svg@1.0.16/canvas2svg.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/opentype.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/opentype.js/0.7.0/opentype.min.js"></script> -->
+<script>
+
+const posted = JSON.parse(window.sessionStorage.getItem("user"));
+
+
+var logotext = posted["text"];
+var fontname = posted["font"];
+var fontsize = posted["size"]*4;
+var variant = posted["variant"];
+var bg = posted["bg"];
+var bggr = posted["bggr"];
+var bg1 = posted["bg1"];
+var bg2 = posted["bg2"];
+var bga = posted["bga"];
+var tc = posted["tc"];
+var tcgr = posted["tcgr"];
+var tc1 = posted["tc1"];
+var tc2 = posted["tc2"];
+var tca = posted["tca"];
+var type = posted["type"];
+var multi = posted["multi"];
+var alnsp = posted["alnsp"];
+document.getElementById('logotext').innerHTML = logotext;
+
+var letterspacing = posted["ltsp"];
+
+var multiplecheck = true;
+
+
+
+
+var textMetrics; var totalHeight;
+var randomVariant;
+var x = ''; 
+var y = ''; 
+var minX,minY,maxX,maxY,multiple,wofflink;
+multiple = multi;
+
+
+async function getTTFFile(fontName, variant) {
+  const url = 'https://t.overdevs.com/fonts.json'; // Replace this with the actual URL of your fonts.json file
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    const fontData = data.items.find(item => item.family === fontName);
+    if (!fontData) {
+      throw new Error('Font not found in the JSON data.');
+    }
+
+    const ttfURL = fontData.files[variant];
+    if (!ttfURL) {
+      throw new Error('Variant not found for the specified font.');
+    }
+
+    // Now you have the TTF file URL for the specified font and variant
+    return ttfURL;
+  } catch (error) {
+    console.error('Error fetching font data:', error.message);
+    return null;
+  }
+}
+
+
+
+function loadNewFont() {
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = generateCSSLink(fontname,variant);
+      wofflink = link.href;
+      document.head.appendChild(link);
+      link.onload = function() {
+        // Change the font of the 'logotext' div
+        var logotext = document.querySelector('#logotext');
+        logotext.style.fontFamily = fontname;
+        logotext.style.fontWeight = variant;
+
+                document.fonts.ready.then(function() {
+            setTimeout(text_handler,600);
+function text_handler(){
+        deflogo();
+      }
+        });
+
+      };
+}
+
+function deflogo(){
+
+setTimeout(() => generateCanvasLogo(document.getElementById('logoCanvas'), fontname, bg, tc,false,false,'logo-normal'), 500);
+setTimeout(() => generateSvgLogo(document.getElementById('logoCanvas7'), fontname, bg, tc), 800);
+setTimeout(() => generateCanvasLogo(document.getElementById('logoCanvas'), fontname, tc, bg,false,false,'logo-inverted'), 1000);
+setTimeout(() => generateCanvasLogo(document.getElementById('logoCanvas3'), fontname, bg, tc, true,false,'logo-icon'), 2000);
+
+
+setTimeout(() => generateCanvasLogo(document.getElementById('logoCanvas'), fontname, '#00000000', tc,false,false,'logo-transparent'), 2000);
+setTimeout(() => setfalse(), 2000);
+
+setTimeout(() => generateCanvasLogo(document.getElementById('logoCanvas'), fontname, '#00000000', '#000000',false,true,'logo-black'), 2200);
+setTimeout(() => generateCanvasLogo(document.getElementById('logoCanvas'), fontname, '#00000000', '#ffffff',false,true,'logo-white'), 2400);
+
+}
+function setfalse(){
+bggr= false; 
+tcgr = false;
+monochrome = true;
+}
+
+function generateCanvasLogo(canvas,fontName,bgColor,textColor,isfavicon = false,ignoregr = false,thename='something') {
+
+  var ctx = canvas.getContext('2d');
+  setbgcolor(ctx,bgColor);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.textBaseline = 'middle';
+  ctx.textAlign = alnsp;
+  ctx.fontFamily = fontName;
+  
+  
+  text = logotext;
+    var cwi = canvas.width*0.4;
+    if(isfavicon) {
+    	text = Array.from(text)[0];
+    	name = 'xx';
+    	chkedline= text;
+    	canvasheight = canvas.height*0.5;
+    	 } 
+else if(multiple) {chklines  = text.split('  '); 
+chkedline = chklines[findLineIndexWithMostCharacters(chklines)];
+ divideheight = chklines.length+3;
+canvasheight = canvas.height/divideheight;
+
+
+      }
+      else {chkedline= text; canvasheight = canvas.height*0.6;}
+      
+ [fontSize, mwd,mht] =  getFontSizeToFit(ctx, chkedline, cwi, canvasheight,fontsize*4);
+//fontSize = getFontSizeToFitx(chkedline,fontName,cwi,canvasheight);
+
+  ctx.font = `${fontSize}px "${fontName}"`;
+    if(x== '' || name != text || multiplecheck != false) {
+textMetrics = ctx.measureText(text);
+ x = canvas.width/ 2;
+ totalHeight = textMetrics.actualBoundingBoxAscent + textMetrics.actualBoundingBoxDescent;
+  y = (canvas.height - totalHeight) / 2 + textMetrics.actualBoundingBoxAscent;
+
+ 
+var newcanvas = document.createElement('canvas');
+newcanvas.width = canvas.width; 
+newcanvas.height = canvas.height;
+var newctx = newcanvas.getContext('2d');
+ newctx.font = `${fontSize}px "${fontName}"`;
+   newctx.textBaseline = 'middle';
+  newctx.textAlign = alnsp;
+  newctx.fontFamily = fontName;
+   newctx.fillStyle = textColor;
+
+multiplelines(canvas,text,x,y,newctx);
+
+var imageData = newctx.getImageData(0, 0, canvas.width, canvas.height);
+var pixels = imageData.data;
+ minX = canvas.width;
+ minY = canvas.height;
+ maxX = 0;
+ maxY = 0;
+
+for (var q = 0; q < canvas.height; q++) {
+  for (var p = 0; p < canvas.width; p++) {
+    var alpha = pixels[(q * canvas.width + p) * 4 + 3];
+    if (alpha > 0) {
+      minX = Math.min(minX, p);
+      minY = Math.min(minY, q);
+      maxX = Math.max(maxX, p);
+      maxY = Math.max(maxY, q);
+    }
+  }
+}
+ }
+name = text;
+
+let the_margin = maxX - minX;
+the_margin = canvas.width - the_margin;
+the_margin = the_margin / 2;
+let new_x_margin = minX - the_margin;
+x = x - new_x_margin;
+minX = minX - new_x_margin;
+maxX = maxX - new_x_margin;
+
+
+ [linewidth, roundedpx, newminX, newminY, neww, newh] = calculatexyValues(minX, maxX, minY, maxY, canvas); 
+applyTypeToCanvas(type, canvas, text, x, y, ctx, textColor, bgColor, linewidth, roundedpx, newminX, newminY, neww, newh,ignoregr);
+ // console.log(ctx.font);
+
+
+   canvas.toBlob(function (blob) {
+      var imageUrl = URL.createObjectURL(blob);
+      addhtml = '<div class="newglogo"><img src="'+imageUrl+'" style="max-width:500px;"/><a download="'+thename+'.png" href="'+imageUrl+'">Download '+ thename+'.png</a></div>';
+      var logoContainer = document.getElementById('newlogos');
+      logoContainer.insertAdjacentHTML('beforeend', addhtml);
+})
+console.log(canvas.id);
+//canvas.remove()
+}
+
+
+
+
+
+async function puresvg(svgel,text,fontSize,x,y){
+  const ttflink = await getTTFFile(fontname, variant);
+  opentype.load(ttflink, function(err, font) {
+    if (err) { console.error("Font could not be loaded:", err); return;}
+    if(multi) {lines = text.split('  ');}  else {  lines = [text];}
+    
+    lines.forEach((line, index) => {
+      y = y + fontSize;
+      let pathx = font.getPath(line, x, y, fontSize);
+      let path = "";
+      const commands = pathx.commands;
+      commands.forEach((cmd) => {
+        switch (cmd.type) {
+          case "M":
+            path += `M${cmd.x},${cmd.y}`;
+            break;
+          case "L":
+            path += `L${cmd.x},${cmd.y}`;
+            break;
+          case "Q":
+            path += `Q${cmd.x1},${cmd.y1} ${cmd.x},${cmd.y}`;
+            break;
+          case "C":
+            path += `C${cmd.x1},${cmd.y1} ${cmd.x2},${cmd.y2} ${cmd.x},${cmd.y}`;
+            break;
+        }
+
+      });
+      if (['2', '5', '6'].indexOf(type) >= 0) {
+        pathElemfill = svgbgurl;
+      } else {
+        pathElemfill = svgtcurl;
+      }
+      const pathElem = createSVGElement("path", {
+        d: path,
+        fill: pathElemfill,
+        id: "thispath" + index,
+        stroke: "none",
+        strokeWidth: "0"
+      });
+      svgel.appendChild(pathElem);
+      document.getElementById('svgContainer').innerHTML += '<a onclick="dlgetsvg();">Download logo.svg</a>';
+
+    });
+
+const svgContainer=document.getElementById("svgContainer");svgContainer.appendChild(svgel);
+let yheight = 0;
+let heightarray = [];
+heightarray[0] = 0;
+let thextominus = 0;
+
+      lines.forEach((theline, index) => {
+		svgbbpath = document.getElementById('thispath'+index).getBBox();
+		console.log(svgbbpath);
+		yheight += svgbbpath.height;
+		nextindex = index+1;
+		if(lines[nextindex] !== undefined) {
+		zerosvgbbpath = document.getElementById('thispath0').getBBox();
+		nextbbpath = document.getElementById('thispath'+nextindex).getBBox();
+		yfix = nextbbpath.y-(svgbbpath.y+svgbbpath.height);
+		yheight += yfix;
+		nxtind = nextbbpath.y-(zerosvgbbpath.y+zerosvgbbpath.height);
+		heightarray[nextindex] = nxtind+nextbbpath.height;
+		
+		xtominus = svgbbpath.width;
+		if (xtominus > thextominus) {
+      thextominus = svgbbpath.width;
+    }
+
+		}
+	});
+lines.forEach((_, index) => {
+svgbbpath = document.getElementById('thispath'+index).getBBox();
+if(alnsp == 'center'){
+fixedx = 500-svgbbpath.width; fixedx  = fixedx/2; fixedx = fixedx-svgbbpath.x;}
+else if(alnsp == 'left') {
+fixedx = 500-thextominus; fixedx  = fixedx/2; fixedx = fixedx-svgbbpath.x;}
+else {
+movetoright = thextominus-svgbbpath.width;
+fixedx = 500-thextominus; fixedx  = fixedx/2; fixedx = fixedx-svgbbpath.x+movetoright;}
+
+
+
+
+fixedy = 500-yheight; fixedy  = fixedy/2; 
+fixedy = fixedy-svgbbpath.y;
+fixedy += heightarray[index];
+document.getElementById('thispath'+index).setAttribute('transform','translate('+fixedx+', '+fixedy+')');
+});
+
+ });
+  }
+
+
+function settextcolor(f,g){
+if(g == '#00000000'&& bggr) {
+  angle = bga * Math.PI / 180,
+    x2 = f.canvas.width * Math.cos(angle);
+    y2 = f.canvas.height * Math.sin(angle);
+g=f.createLinearGradient(0,0,x2,y2);
+g.addColorStop("0",bg1);
+g.addColorStop("1",bg2);
+}
+else if(bggr && g==bg){
+  angle = bga * Math.PI / 180,
+    x2 = f.canvas.width * Math.cos(angle);
+    y2 = f.canvas.height * Math.sin(angle);
+g=f.createLinearGradient(0,0,x2,y2);
+g.addColorStop("0",bg1);
+g.addColorStop("1",bg2);
+}
+else if(tcgr &&  g=='#00000000'){
+g = bg;
+}
+else if(tcgr &&  g!=bg){
+    angle = tca * Math.PI / 180,
+    x2 = f.canvas.width * Math.cos(angle);
+    y2 = f.canvas.height * Math.sin(angle);
+g=f.createLinearGradient(0,0,x2,y2);
+g.addColorStop("0",tc1);
+g.addColorStop("1",tc2);
+}
+else {
+
+}
+
+if(g == '#00000000' && monochrome == false) {
+f.strokeStyle = bg;
+f.fillStyle = bg;
+}
+
+else {
+f.strokeStyle = g;
+f.fillStyle = g;
+}
+}
+
+
+function setbgcolor(f,g){
+if(tcgr && g==tc){
+  angle = tca * Math.PI / 180,
+    x2 = f.canvas.width * Math.cos(angle);
+    y2 = f.canvas.height * Math.sin(angle);
+g=f.createLinearGradient(0,0,x2,y2);
+g.addColorStop("0",tc1);
+g.addColorStop("1",tc2);
+}
+else if(bggr &g != tc){
+	if(g =='#00000000')
+	{
+	f.strokeStyle = g;
+	f.fillStyle = g;
+
+	}
+	else {
+    angle = bga * Math.PI / 180,
+    x2 = f.canvas.width * Math.cos(angle);
+    y2 = f.canvas.height * Math.sin(angle);
+	g=f.createLinearGradient(0,0,x2,y2);
+	g.addColorStop("0",bg1);
+	g.addColorStop("1",bg2);
+	}
+}
+else {
+
+}
+f.strokeStyle = g;
+f.fillStyle = g;
+}
+   loadNewFont();
+
+   function createSVGElement(tag, attrs) {
+      const elem = document.createElementNS("http://www.w3.org/2000/svg", tag);
+      for (let key in attrs) {
+        elem.setAttribute(key, attrs[key]);
+      }
+      return elem;
+    }
+async function generateSvgLogo(canvas,fontName,bgColor,textColor,isfavicon = false) {
+    // Create SVG element
+    const svg = createSVGElement("svg", {
+      width: "500",
+      height: "500",
+      viewBox: "0 0 500 500",
+      xmlns: "http://www.w3.org/2000/svg",
+    });
+
+    // Create background rectangle
+    svg_b_angle = bga * Math.PI / 180,
+   svg_b_x2 = canvas.width * Math.cos(svg_b_angle);
+    svg_b_y2 = canvas.height * Math.sin(svg_b_angle);
+
+    const defs = createSVGElement("defs", {});
+if(bggr) {
+    const gradient = createSVGElement("linearGradient", {
+      id: "backgroundgradient",
+      x1: "0",
+      y1: "0",
+      x2: svg_b_x2,
+      y2: svg_b_y2,
+      gradientUnits: "userSpaceOnUse"
+    });
+
+    const stop1 = createSVGElement("stop", {
+      offset: 0,
+      "stop-color": bg1,
+    });
+    const stop2 = createSVGElement("stop", {
+      offset: 1,
+      "stop-color": bg2,
+    });
+
+    gradient.appendChild(stop1);
+    gradient.appendChild(stop2);
+    defs.appendChild(gradient);
+    svgbgurl = 'url(#backgroundgradient)';
+}
+else {
+    svgbgurl = bg;
+}
+// text bacgkround set
+if(tcgr){
+    svg_t_angle = tca * Math.PI / 180,
+    svg_t_x2 = canvas.width * Math.cos(svg_t_angle);
+    svg_t_y2 = canvas.height * Math.sin(svg_t_angle);
+    
+    const gradient = createSVGElement("linearGradient", {
+      id: "textgradient",
+      x1: "0",
+      y1: "0",
+      x2: svg_t_x2,
+      y2: svg_t_y2,
+      gradientUnits: "userSpaceOnUse"
+    });
+
+    const stop1 = createSVGElement("stop", {
+      offset: 0,
+      "stop-color": tc1,
+    });
+    const stop2 = createSVGElement("stop", {
+      offset: 1,
+      "stop-color": tc2,
+    });
+
+    gradient.appendChild(stop1);
+    gradient.appendChild(stop2);
+    
+    
+    defs.appendChild(gradient);
+    svgtcurl = 'url(#textgradient)';
+}
+else {
+    svgtcurl = tc;
+}
+
+    const rect = createSVGElement("rect", {
+      x: "0",
+      y: "0",
+      width: "100%",
+      height: "100%",
+      fill: svgbgurl,
+    });
+
+    // Append rectangle to the SVG
+        svg.appendChild(defs);
+        svg.appendChild(rect);
+
+
+ 
+
+
+//var sctx = new C2S(canvas.width, canvas.height);
+var sctx = canvas.getContext('2d');
+   setbgcolor(sctx,bgColor)
+  sctx.fillRect(0, 0, canvas.width, canvas.height);
+  sctx.textBaseline = 'middle';
+  sctx.textAlign = alnsp;
+  sctx.fontFamily = fontName;
+ 
+  text = logotext;
+    var cwi = canvas.width*0.4;
+if(multiple) {chklines  = text.split('  '); 
+chkedline = chklines[findLineIndexWithMostCharacters(chklines)];
+ divideheight = chklines.length+3;
+canvasheight = canvas.height/divideheight;
+      }
+      else {chkedline= text; canvasheight = canvas.height*0.6;}
+      
+//fontSize = getFontSizeToFitx(chkedline,fontName,cwi,canvasheight);
+ [fontSize, mwd,mht] =  getFontSizeToFit(sctx, chkedline, cwi, canvasheight,fontsize);
+
+  sctx.font =  `${fontSize}px "${fontName}"`;
+  if(x== '' || name != text || multiplecheck != false) {
+
+textMetrics = sctx.measureText(text);
+ x = canvas.width/ 2;
+ totalHeight = textMetrics.actualBoundingBoxAscent + textMetrics.actualBoundingBoxDescent;
+  y = (canvas.height - totalHeight) / 2 + textMetrics.actualBoundingBoxAscent;
+ 
+var newcanvas = document.createElement('canvas');
+newcanvas.width = canvas.width; 
+newcanvas.height = canvas.height;
+var newctx = newcanvas.getContext('2d');
+ newctx.font = `${fontSize}px "${fontName}"`;
+   newctx.textBaseline = 'middle';
+  newctx.textAlign = 'center';
+  newctx.fontFamily = fontName;
+   newctx.fillStyle = textColor;
+multiplelines(canvas,text,x,y,newctx);
+
+var imageData = newctx.getImageData(0, 0, canvas.width, canvas.height);
+var pixels = imageData.data;
+ minX = canvas.width;
+ minY = canvas.height;
+ maxX = 0;
+ maxY = 0;
+
+for (var q = 0; q < canvas.height; q++) {
+  for (var p = 0; p < canvas.width; p++) {
+    var alpha = pixels[(q * canvas.width + p) * 4 + 3];
+    if (alpha > 0) {
+      minX = Math.min(minX, p);
+      minY = Math.min(minY, q);
+      maxX = Math.max(maxX, p);
+      maxY = Math.max(maxY, q);
+    }
+  }
+}
+ }
+name = text;
+
+let the_margin = maxX - minX;
+the_margin = canvas.width - the_margin;
+the_margin = the_margin / 2;
+let new_x_margin = minX - the_margin;
+x = x - new_x_margin;
+minX = minX - new_x_margin;
+maxX = maxX - new_x_margin;
+ [linewidth, roundedpx, newminX, newminY, neww, newh] = calculatexyValues(minX, maxX, minY, maxY, canvas); 
+ 
+ 
+ switch (type) {
+  case 1:{
+      
+    break;
+}
+  case "2":{
+         const rect = createSVGElement("rect", {
+      x: newminX,
+      y: newminY,
+      fill: svgtcurl,
+      width: neww,
+      height: newh,
+      stroke: 'none',
+      strokeWidth: linewidth,
+      strokeMiterlimit: "10",
+        });
+    svg.appendChild(rect);
+    break;
+}
+  case "3" :{
+         const rect = createSVGElement("rect", {
+      x: newminX,
+      y: newminY,
+      fill: "none",
+      width: neww,
+      height: newh,
+      stroke: tc,
+      "stroke-width": linewidth,
+"stroke-miterlimit": "10",
+      fill: svgbgurl,
+    });
+
+    svg.appendChild(rect);
+    break;
+}
+case "4":{
+         const rect = createSVGElement("rect", {
+      x: newminX,
+      y: newminY,
+      rx: roundedpx,
+      ry: roundedpx,
+      fill: "none",
+      width: neww,
+      height: newh,
+      stroke: tc,
+      "stroke-width": linewidth,
+"stroke-miterlimit": "10",
+      fill: svgbgurl,
+    });
+    svg.appendChild(rect);
+    break;
+
+
+}
+case "5": {
+             const rect = createSVGElement("rect", {
+      x: newminX,
+      y: newminY,
+      rx: roundedpx,
+      ry: roundedpx,
+      fill: svgtcurl,
+      width: neww,
+      height: newh,
+      stroke: 'none',
+      strokeWidth: linewidth,
+      strokeMiterlimit: "10",
+        });
+    svg.appendChild(rect);
+    break;
+}
+case "6":{
+      const nlineWidth = linewidth * 10;
+
+      const radius = Math.max(neww, newh);
+      const radiuspad = radius * 0.2;
+      const radiusint = radius + radiuspad;
+      const radiusval = radiusint * 0.5;
+   //   ctx.arc(canvas.width / 2, canvas.height / 2, radius, 0, 2 * Math.PI);
+   
+       const circle = createSVGElement("circle", {
+      cx: canvas.width / 2, // Center x coordinate (canvas.width / 2)
+      cy: canvas.height / 2, // Center y coordinate (canvas.height / 2)
+      r: radiusval,   // Radius value
+      "stroke-width": nlineWidth, // Set the stroke width
+      fill: svgtcurl,     // Set fill to none for a hollow circle
+      stroke: svgtcurl,  // Set the stroke color
+    });
+
+    // Append circle to the SVG
+    svg.appendChild(circle);
+
+
+break;
+
+}
+case "7": {
+      const nlineWidth = linewidth;
+
+      const radius = Math.max(neww, newh);
+      const radiuspad = radius * 0.2;
+      const radiusint = radius + radiuspad;
+      const radiusval = radiusint * 0.5;
+   //   ctx.arc(canvas.width / 2, canvas.height / 2, radius, 0, 2 * Math.PI);
+   
+       const circle = createSVGElement("circle", {
+      cx: canvas.width / 2, // Center x coordinate (canvas.width / 2)
+      cy: canvas.height / 2, // Center y coordinate (canvas.height / 2)
+      r: radiusval,   // Radius value
+      "stroke-width": nlineWidth, // Set the stroke width
+      fill: "none",     // Set fill to none for a hollow circle
+      stroke: svgtcurl,  // Set the stroke color
+    });
+
+    // Append circle to the SVG
+    svg.appendChild(circle);
+
+break;
+}
+}
+tx = x-x/2;
+txw = textMetrics.actualBoundingBoxLeft+textMetrics.actualBoundingBoxRight;
+txw = x-txw/2;
+
+thepath = await puresvg(svg,text,fontSize,txw,y);
+ 
+//applyTypeToCanvas(type, canvas, text, x, y, sctx, textColor, bgColor, linewidth, roundedpx, newminX, newminY, neww, newh);
+//console.log(canvas.id);
+
+}
+
+function dlgetsvg() {
+var svgData = document.querySelector('svg').outerHTML;
+var svgBlob = new Blob([svgData], {type:"image/svg+xml;charset=utf-8"});
+var svgUrl = URL.createObjectURL(svgBlob);
+var dlLnk = document.createElement("a");
+dlLnk.href = svgUrl;
+dlLnk.download = "logo.svg";
+document.body.appendChild(dlLnk);
+dlLnk.click();
+document.body.removeChild(dlLnk);
+}
+
+</script>
+<footer><p class="footertext">Built and maintained by <a href="https://github.com/avadhesh18/">@avadhesh18</a><br> <a href="https://github.com/avadhesh18/Logokio">Star Logokio on Github</a> | <a href="https://github.com/avadhesh18/issues/">Issues</a></p>
+
+</footer>
+</body></html>
+
+
