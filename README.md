@@ -18,7 +18,7 @@ There is no server involved, the code completely runs in your browser.
 
 ## How to Use
 1. Make sure you are using the latest Chrome/Firefox or Safari browser.
-2. Open logokio.com and enter your logo text in the input field.
+2. Open [Logokio](https://logokio.com) and enter your logo text in the input field.
 3. Click the "Make a Logo" button to generate your logo.
 4. Explore multiple logo options and choose the one that you like.
 
