@@ -39,6 +39,9 @@ With just one click, you get various logo file options, including:
 
 ![Logo File Options](docs/folm.png)
 
+## To-Do
+- A single ZIP file download of all logo files.
+
 ## Contributions
 
 This project is created and maintained by [@avadhesh18](https://github.com/avadhesh18). You are welcome to contribute by submitting issues or pull requests to improve the logo generator.
